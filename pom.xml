@@ -10,15 +10,20 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
+	<plugins>
+        	<plugin>
+            		<groupId>org.sonarsource.scanner.maven</groupId>
+           		<artifactId>sonar-maven-plugin</artifactId>
+            		<version>3.9.1.2185</version>
+       		</plugin>
+      	 	<plugin>
+                	<groupId>org.apache.maven.plugins</groupId>
+                	<artifactId>maven-compiler-plugin</artifactId>
+                	<version>3.8.1</version>
+                	<configuration>
+                    		<source>${maven.compiler.source}</source>
+                    		<target>${maven.compiler.target}</target>
+                	</configuration>
 		</plugin>
 		<plugin>
 		    <groupId>org.sonarsource.scanner.maven</groupId>

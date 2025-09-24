@@ -9,20 +9,26 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/mihir-mash/hello-java-jenkins.git'
             }
         }
-        stage('Build') {
+        stage('Build and Test') {
             steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+                // This command compiles the code, runs tests, and packages it into a JAR
+                sh 'mvn clean install'
             }
         }
         stage('SonarQube Analysis') {
             steps {
                 withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_LOGIN')]) {
                     sh 'mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN'
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                script {
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "Pipeline aborted due to Quality Gate failure: ${qg.status}"
+                    }
                 }
             }
         }
