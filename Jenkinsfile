@@ -15,14 +15,14 @@ pipeline {
             }
         }
         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_LOGIN')]) {
-                        sh 'mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN'
-                    }
-                    waitForQualityGate(abortPipeline: true)
-                }
-            }
-        }
+	    steps {
+        	withSonarQubeEnv('sonarqube') {
+            		withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_LOGIN')]) {
+                		sh 'mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN'
+            		}
+            		waitForQualityGate(abortPipeline: true)
+        	}
+    	}
+	}
     }
 }
