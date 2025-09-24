@@ -22,7 +22,7 @@ pipeline {
                         sh 'mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN'
                     }
                     // This step will now be able to find the analysis from the previous command
-                    waitForQualityGate()
+                    waitForQualityGate(abortPipeline: true)
                 }
             }
         }
