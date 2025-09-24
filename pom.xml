@@ -19,7 +19,12 @@
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                 </configuration>
-            </plugin>
+		</plugin>
+		<plugin>
+		    <groupId>org.sonarsource.scanner.maven</groupId>
+		    <artifactId>sonar-maven-plugin</artifactId>
+		    <version>3.9.1.2185</version>
+		</plugin>
         </plugins>
     </build>
 </project>

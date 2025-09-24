@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'M3' // This name must match the one you configured in Jenkins
+        maven 'M3'
     }
     stages {
         stage('Checkout') {
@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean install'
             }
         }
         stage('Test') {
@@ -19,5 +19,10 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                sh 'mvn sonar:sonar'
+            }
+        }
     }
-}
+}}
